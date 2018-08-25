@@ -1,9 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 
 var PORT = process.env.PORT || 3000;
 
 var app = express();
+
+// Serve static content for the app from the "public" directory in the application directory. Any file can just be sent back by express. 
+app.use(express.static("public"));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,7 +24,7 @@ app.set("view engine", "handlebars");
 // Import routes and give the server access to them.
 var routes = require("./controllers/burgers_controller.js");
 
-// app.use(routes);
+app.use(routes);
 
 app.listen(PORT, function() {
   console.log("App now listening at localhost:" + PORT);

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <h1>Eat. Da. Burger.</h1>
+                <p>Check out our latest menu or add your own burger!</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <img src="./assets/img/burger.png" alt="Burger" style="height: 300px;" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+            {{#each burgers}} 
+                {{#unless this.devoured}}
+                <li>{{this.burger_name}}</li>
+                <button class="eatButton" data-id="{{this.id}}">Eat it.</button>
+                {{/unless}} 
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+            {{#each burgers}} 
+                {{#if this.devoured}}
+                <li>{{this.burger_name}}</li>
+                {{/if}} 
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
