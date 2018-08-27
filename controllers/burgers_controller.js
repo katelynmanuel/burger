@@ -15,18 +15,28 @@ router.get("/", function (req, res) {
     });
 });
 
-//Update a burger from 
-router.put("/:id", function (req, res) {
-    burger.update(req.params.id, function(result) {
-        console.log("Put res: " + result);
-        res.redirect("/");
-    })
-})
+// Update a burger devoured status.
+router.put("/api/burgers/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+    console.log("Condition: ", condition);
+    
+    burger.update({ devoured: req.body.devoured }, condition, 
+        function (result)  {
+            if (result.changedRows === 0) {
+                return res.status(404).end();
+            }
+            res.status(200).end();
+        }
+    );
+});
 
 router.post("/", function(req, res) {
-    burger.create("burger_name", req.body.name, function() {
+    burger.create("burger_name", req.body.burger_name, function(result) {
+        res.json({ id: result.insertId})
         res.redirect("/");
+        console.log("Router Post: " + req.body.burger_name);
     });
 });
 
+// Export routes for server.js to use.
 module.exports = router;
