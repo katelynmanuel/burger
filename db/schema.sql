@@ -9,5 +9,5 @@ CREATE TABLE burgers
     devoured BOOLEAN
 );
 
-SELECT * FROM burgers
+SELECT * FROM burgers;
 
